@@ -49,7 +49,3 @@ while True:
     length = bytes_to_u32(data)
     data += sock.recv(length - 4)
     print(bytes_to_fp32_list(data[59:87]))
-
-
-
-
