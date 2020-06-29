@@ -1,12 +1,7 @@
-
-#auto_report_30002
+#auto_report_30003, report joint torque in 100 HZ
 import socket
 import struct
 import sys
-import numpy as np
-# import pandas as pd
-# import matplotlib.pyplot as plt
-# import matplotlib
 savedStdout = sys.stdout
 
 def bytes_to_fp32(bytes_data, is_big_endian=False):
