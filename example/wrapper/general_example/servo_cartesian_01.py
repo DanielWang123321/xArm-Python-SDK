@@ -6,6 +6,7 @@
 #
 # Author: Vinman <vinman.wen@ufactory.cc> <vinman.cub@gmail.com>
 
+
 """
 Description: Servo cartesian
 """
@@ -30,24 +31,24 @@ arm.reset(wait=True)
 arm.set_servo_angle(angle=[0,-42.6,3.2,0,39.4,0],speed=60,wait=True)
 print(arm.get_position())
 
-# arm.set_mode(1)
-# arm.set_state(0)
-# time.sleep(0.1)
-#
-# while arm.connected and arm.state != 4:
-#     for i in range(300):
-#         x = 200 + i
-#         arm.set_servo_cartesian([x, 0, 200, 180, 0, 0])
-#         mvpose = [x, 0, 200, 180, 0, 0]
-#         ret = arm.set_servo_cartesian(mvpose)
-#         print('set_servo_cartesian, ret={}'.format(ret))
-#         time.sleep(0.005)
-#     for i in range(300):
-#         x = 500 - i
-#         arm.set_servo_cartesian([x, 0, 200, 180, 0, 0])
-#         mvpose = [x, 0, 200, 180, 0, 0]
-#         ret = arm.set_servo_cartesian(mvpose)
-#         print('set_servo_cartesian, ret={}'.format(ret))
-#         time.sleep(0.005)
-#
-# arm.disconnect()
+arm.set_mode(1)
+arm.set_state(0)
+time.sleep(0.1)
+
+while arm.connected and arm.state != 4:
+    for i in range(300):
+        x = 200 + i
+        arm.set_servo_cartesian([x, 0, 200, 180, 0, 0])
+        mvpose = [x, 0, 200, 180, 0, 0]
+        ret = arm.set_servo_cartesian(mvpose)
+        print('set_servo_cartesian, ret={}'.format(ret))
+        time.sleep(0.005)
+    for i in range(300):
+        x = 500 - i
+        arm.set_servo_cartesian([x, 0, 200, 180, 0, 0])
+        mvpose = [x, 0, 200, 180, 0, 0]
+        ret = arm.set_servo_cartesian(mvpose)
+        print('set_servo_cartesian, ret={}'.format(ret))
+        time.sleep(0.005)
+
+arm.disconnect()

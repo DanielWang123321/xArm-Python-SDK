@@ -3,6 +3,11 @@ import socket
 import struct
 import sys
 savedStdout = sys.stdout
+import numpy as np
+import pandas as pd
+from pandas import Series, DataFrame
+# from matplotlib import pyplot as plt
+
 
 def bytes_to_fp32(bytes_data, is_big_endian=False):
     """
@@ -43,9 +48,18 @@ sock.setblocking(True)
 sock.settimeout(1)
 sock.connect((robot_ip, robot_port))
 
-
-while True:
+for i in range(100):
     data = sock.recv(4)
     length = bytes_to_u32(data)
     data += sock.recv(length - 4)
-    print(bytes_to_fp32_list(data[59:87]))
+    j1 = bytes_to_fp32_list(data[59:63])
+    j2 = bytes_to_fp32_list(data[63:67])
+    j3 = bytes_to_fp32_list(data[67:71])
+    j4 = bytes_to_fp32_list(data[71:75])
+    j5 = bytes_to_fp32_list(data[75:79])
+    j6 = bytes_to_fp32_list(data[79:83])
+    # print(j1,j2,j3,j4,j5,j6)
+    obj1 = pd.Series(i,j1)
+
+    print(obj1)
+
