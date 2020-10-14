@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 # Software License Agreement (BSD License)
 #
-# Copyright (c) 2020, UFACTORY, Inc.
+# Copyright (c) 2019, UFACTORY, Inc.
 # All rights reserved.
 #
-# Author: Hutton <geweipan@ufactory.cc>
+# Author: Vinman <vinman.wen@ufactory.cc> <vinman.cub@gmail.com>
 
 """
-Example: Bio Gripper Control
+Example: Gripper Control
 Please make sure that the gripper is attached to the end.
 """
+
 import os
 import sys
 import time
@@ -28,14 +29,21 @@ except:
 
 
 arm = XArmAPI(ip)
-time.sleep(0.5)
-if arm.warn_code != 0:
-    arm.clean_warn()
-if arm.error_code != 0:
-    arm.clean_error()
-
-arm.motion_enable(enable=True) #gripper enable
-time.sleep(2)  #Initialize the wait time
-arm.set_gripper_position(-10,wait=False,auto_enable=True,speed=900,timeout=10) #gripper open
+arm.motion_enable(True)
+arm.clean_error()
+arm.set_mode(0)
+arm.set_state(0)
 time.sleep(1)
-arm.set_gripper_position(10,wait=False,auto_enable=True,speed=900,timeout=10)  #gripper close
+
+code = arm.set_bio_gripper_enable(True)
+print('set_bio_gripper_enable, code={}'.format(code))
+
+code = arm.set_bio_gripper_speed(300)
+print('set_bio_gripper_speed, code={}'.format(code))
+
+while arm.connected and arm.error_code == 0:
+    code = arm.open_bio_gripper()
+    print('open_bio_gripper, code={}'.format(code))
+    code = arm.close_bio_gripper()
+    print('close_bio_gripper, code={}'.format(code))
+
